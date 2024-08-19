@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { Modal, Descriptions, Image, Spin, Alert } from 'antd';
 import { fetchPokemonDetails } from '../utils/axiosConfig';
 import PropTypes from 'prop-types';
@@ -10,6 +10,9 @@ const PokemonModal = ({ pokemon, onClose }) => {
 
   useEffect(() => {
     const fetchDetails = async () => {
+      setLoading(true);
+      setError(null); // Clear any existing errors before fetching
+
       try {
         const data = await fetchPokemonDetails(pokemon.name);
         setDetails(data);
@@ -25,21 +28,42 @@ const PokemonModal = ({ pokemon, onClose }) => {
     }
   }, [pokemon]);
 
-  if (loading) return <Spin size="large" />;
-  if (error) return <Alert message="Error" description={error} type="error" />;
+  const memoizedDetails = useMemo(() => details, [details]);
+
+  const handleClose = useCallback(() => {
+    onClose();
+  }, [onClose]);
+
+  if (loading) {
+    return (
+      <Spin
+        size="large"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
+        }}
+      />
+    );
+  }
 
   return (
-    <Modal open={!!pokemon} onCancel={onClose} title={pokemon?.name} footer={null}>
-      {details && (
-        <>
-          <Image src={details.sprites.front_default} alt={details.name} />
-          <Descriptions column={2} bordered>
-            <Descriptions.Item label="Name">{details.name}</Descriptions.Item>
-            <Descriptions.Item label="Height">{details.height}</Descriptions.Item>
-            <Descriptions.Item label="Weight">{details.weight}</Descriptions.Item>
-            <Descriptions.Item label="Base Experience">{details.base_experience}</Descriptions.Item>
-          </Descriptions>
-        </>
+    <Modal open={!!pokemon} onCancel={handleClose} title={pokemon?.name} footer={null}>
+      {error ? (
+        <Alert message="Error" description={error} type="error" />
+      ) : (
+        memoizedDetails && (
+          <>
+            <Image src={memoizedDetails.sprites.front_default} alt={memoizedDetails.name} />
+            <Descriptions column={2} bordered>
+              <Descriptions.Item label="Name">{memoizedDetails.name}</Descriptions.Item>
+              <Descriptions.Item label="Height">{memoizedDetails.height}</Descriptions.Item>
+              <Descriptions.Item label="Weight">{memoizedDetails.weight}</Descriptions.Item>
+              <Descriptions.Item label="Base Experience">{memoizedDetails.base_experience}</Descriptions.Item>
+            </Descriptions>
+          </>
+        )
       )}
     </Modal>
   );
