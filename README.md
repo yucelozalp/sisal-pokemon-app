@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# Pokémon App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a single-page React application that lists Pokémon using the PokeAPI. It allows users to search, filter, and paginate through Pokémon. Clicking on a Pokémon opens a modal displaying detailed information about the selected Pokémon. The project uses React 18, Redux for state management, Axios for network requests, and Ant Design for UI components.
 
-## Available Scripts
+## Features Implemented
 
-In the project directory, you can run:
+- **Pokémon Listing**: Displays a list of Pokémon with pagination. Supports searching and filtering Pokémon by name. Pokémon cards are displayed with proper alignment and spacing.
+- **Pagination**: Allows users to navigate through Pokémon pages with options for 10, 20, or 30 Pokémon per page.
+- **Search Functionality**: Provides a search field to filter Pokémon by name.
+- **Modal**: Displays detailed information about a selected Pokémon, including its image, height, weight, and base experience. Shows a loading spinner while fetching Pokémon details and handles errors gracefully.
 
-### `npm start`
+## Project Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Clone the Repository
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+git clone https://github.com/yucelozalp/sisal-pokemon-app.git
+cd pokemon-app
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Install Dependencies
 
-### `npm run build`
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Start the Development Server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This command starts the development server and opens the application in your default browser. The application will be available at [http://localhost:3000](http://localhost:3000).
 
-### `npm run eject`
+## Running Tests
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Run Unit Tests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm test
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This command runs the unit tests for the project using Jest and React Testing Library. It will check the functionality of components like `PokemonList` and `PokemonModal`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Test Coverage
 
-## Learn More
+To check the test coverage, use:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+npm test -- --coverage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## File Structure
 
-### Code Splitting
+- **`src/`**: Contains all the source code.
+  - **`components/`**: Contains React components including `PokemonList.jsx`, `PokemonModal.jsx`, `Search.jsx`, and `Pagination.jsx`.
+  - **`redux/`**: Contains Redux slices and store configuration.
+  - **`services/`**: Contains API service functions like `pokemonService.js`.
+  - **`App.jsx`**: Main application component.
+  - **`index.js`**: Entry point for React, sets up the application and renders it to the DOM.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Key Code Sections
 
-### Analyzing the Bundle Size
+### `index.js`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This file sets up the React application and renders it to the DOM using `ReactDOM.createRoot` for React 18 compatibility.
 
-### Making a Progressive Web App
+### `PokemonList.jsx`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Handles fetching, searching, filtering, and displaying Pokémon. Integrates pagination and manages user interactions.
 
-### Advanced Configuration
+### `PokemonModal.jsx`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Fetches and displays detailed information about a selected Pokémon. Displays a loading spinner and handles errors.
 
-### Deployment
+### `PokemonList.css` and `PokemonModal.css`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contains custom CSS for styling Pokémon cards, pagination, and modal spinner.
