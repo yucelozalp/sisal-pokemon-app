@@ -46,6 +46,17 @@ const PokemonList = () => {
       {status === 'loading' && <Spin size="large" />}
       {status === 'failed' && <Alert message="Error" description={error} type="error" />}
       <Row gutter={[16, 16]}>
+        {filteredPokemons.length === 0 && searchTerm && (
+          <Col span={24}>
+            <Alert
+              message="No Pokémon Found"
+              description="No Pokémon matches your search criteria."
+              type="info"
+              showIcon
+              style={{ marginTop: 20 }}
+            />
+          </Col>
+        )}
         {filteredPokemons.map(pokemon => (
           <Col span={8} key={pokemon.name}>
             <Card
