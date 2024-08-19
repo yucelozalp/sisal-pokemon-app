@@ -45,7 +45,7 @@ npm test -- --coverage
 - **`src/`**: Contains all the source code.
   - **`components/`**: Contains React components including `PokemonList.jsx`, `PokemonModal.jsx`, `Search.jsx`, and `Pagination.jsx`.
   - **`redux/`**: Contains Redux slices and store configuration.
-  - **`services/`**: Contains API service functions like `pokemonService.js`.
+  - **`utils/`**: Contains API service functions like `axiosConfig.jsx`.
   - **`App.jsx`**: Main application component.
   - **`index.js`**: Entry point for React, sets up the application and renders it to the DOM.
 
